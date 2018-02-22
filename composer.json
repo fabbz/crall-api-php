@@ -10,5 +10,6 @@
             "Crall\\": "src/"
         }
     },
+    "minimum-stability": "dev",
     "require": {}
 }
