@@ -9,6 +9,6 @@
         "psr-4": {
             "Crall": "src/"
         }
-    }
+    },
     "require": {}
 }
