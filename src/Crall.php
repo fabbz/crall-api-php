@@ -1,6 +1,5 @@
 <?php
 namespace Crall;
-require 'autoload.php';
 use Crall\Models\Request;
 
 class Crall {
