@@ -6,7 +6,7 @@ class Crall {
     protected $api_key;
     protected $transport;
 
-    const ENDPOINT = 'https://app.crall.dev/api';
+    const ENDPOINT = 'https://app.crall.io/api';
     const VERSION = 'v1';
 
 

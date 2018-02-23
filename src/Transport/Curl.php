@@ -36,8 +36,8 @@ class Curl extends BaseTransport implements TransportInterface {
 
         curl_setopt($this->transport, CURLOPT_USERAGENT, $this->userAgent());
         curl_setopt($this->transport, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($this->transport, CURLOPT_VERBOSE, true);
-        curl_setopt($this->transport, CURLOPT_HEADER, true);
+        curl_setopt($this->transport, CURLOPT_VERBOSE, false);
+        curl_setopt($this->transport, CURLOPT_HEADER, false);
         curl_setopt($this->transport, CURLOPT_TIMEOUT, 5);
         curl_setopt($this->transport, CURLOPT_SSL_VERIFYPEER, $this->request->verify_ssl);
         curl_setopt($this->transport, CURLOPT_SSL_VERIFYHOST, $this->request->verify_ssl);
@@ -48,21 +48,26 @@ class Curl extends BaseTransport implements TransportInterface {
             case 'POST':
                 $this->isPost();
                 $this->addPayload();
-            break;
+                break;
 
             case 'PUT':
                 $this->isCustomRequest();
                 $this->addPayload();
-            break;
+                break;
 
             case 'DELETE':
                 $this->isCustomRequest();
-            break;
+                break;
         }
 
         $response = curl_exec($this->transport);
-        $headers = curl_getinfo($this->transport);
         curl_close($this->transport);
-        die(($response));
+        $response = json_decode($response,true);
+
+        if(!$response) {
+            return false;
+        }
+
+        return $response;
     }
 }

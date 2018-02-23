@@ -33,10 +33,14 @@ class Http extends BaseTransport implements TransportInterface {
         $response = @file_get_contents($this->request->getUrlWithParams(), false, stream_context_create($this->transport));
 
         if($response === false) {
-            $error = error_get_last();
-            die(($error));
+            return false;
         }
-die(($response));
-        # die(print_r($result));
+
+        $response = json_decode($response,true);
+        if($response) {
+            return false;
+        }
+
+        return $response;
     }
 }
